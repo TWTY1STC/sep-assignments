@@ -1,0 +1,21 @@
+Needed a refresher in Ruby syntax and deeper look at the Ruby documentation about Arrays and Numeric data. 
+Reviewed the spec file to get a sense of what the code needed to achieve. 
+
+After a few hours' review, I tackled the scenarios. For some -- #middle, #leave, #index and #search--
+I started by creating a 'roadmap', comments that described the steps required to gather the information 
+needed to solve each problem.
+For example, for #middle:
+        #count number of members
+        #divide by 2 = quotient
+        # if members.count / 2 = whole number, return members[quotient].name
+        #else, members.count /2 = fraction, return members[quotient.floor].name so 2.5 = 2
+After some research I added:
+        #members.at[quotient.floor]
+
+As I researched, I eliminated information that I initally thought I needed, for example I initally had plans to add an 
+name attribute to the member object. I decided that wasn't necessary. 
+
+I referenced the documentation about Array methods to understand what each 
+method required and returned. As I read through the documentation, I came across gold-bits that helped clean
+existing code, for example, for #first, I initially had return members[0], 
+I refactored this to simply: members.first.

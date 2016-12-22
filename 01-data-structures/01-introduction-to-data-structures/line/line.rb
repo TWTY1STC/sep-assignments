@@ -9,26 +9,51 @@ class Line
   end
 
   def join(person)
+    members << person
   end
 
   def leave(person)
+    index(person)
+    members.delete(person)
+    members = members.compact!
+=begin
+    #people in position after the person who leaves should move up a psition. 
+    if person.index > @person_index
+       members << person.index
+      members.person[] > members[p_index] 
+      #members whose index is greater than person who left's index << (shift left -- move up an index)
+    end
+=end
   end
 
   def front
+    members.first
   end
 
   def middle
+    quotient = members.length / 2
+    members.at[quotient.floor]
+    #count number of members
+    #divide by 2 = quotient
+    # if members.count / 2 = whole number, return member[quotient].name
+    #else, member.count /2 = fraction, return member[quotient.floor].name so 2.5 = 2
+    #member.at[quotient.floor]
   end
 
   def back
+    members.last
   end
 
   def search(person)
+    index(person)
+    members[@person_index]
   end
 
   private
 
   def index(person)
+    @person_index = members.find_index(person)
+    return @person_index
   end
 
 end
