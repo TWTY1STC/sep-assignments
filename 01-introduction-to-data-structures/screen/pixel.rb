@@ -11,11 +11,22 @@ class Pixel
 
 
   def initialize(red, green, blue, x, y)
+    @red = red
+    @green = green
+    @blue = blue
+    @x = x
+    @y = y
   end
 
   private
 
   def validate_color(color)
+    if color > 255
+      color ==255
+    end
+    if color <0
+      color = 0
+    end
   end
 
 end
