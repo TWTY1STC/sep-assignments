@@ -1,0 +1,4 @@
+
+The solution that cleared all tests is repetative and I'd like to explore
+how to refactor the head and tail pointers.. Perhaps there is another way to 
+set it in the initialization that more flexible. 
