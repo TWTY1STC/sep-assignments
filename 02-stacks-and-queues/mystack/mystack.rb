@@ -12,16 +12,14 @@ class MyStack
   end
 
   def pop
-    temp = @stack[-1]
-    @stack.delete(-1)
-    return temp
+    @stack.delete_at(-1)
   end
 
   def empty?
     if @stack.length > 0
-      false
-    else
-      true
+        false
+      else
+        true
     end
   end
 end
