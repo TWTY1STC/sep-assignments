@@ -12,3 +12,8 @@ and the address (reference) of the next node in the list.
     self.next = null
   end
 end
+
+=begin
+Linked list as container for nodes.... List > node
+
+=end
