@@ -17,7 +17,7 @@ class MyStack
   end
 
   def pop
-    if @stack.length >=0
+    if @stack.length >0
       puts @stack
       top = @stack.index(self.top)
       puts "!!!" + self.top
@@ -25,9 +25,10 @@ class MyStack
       temp = self.top
       puts "***" + temp
       @stack.delete(self.top)
-      self.top = @stack.fetch(@stack.index(self.top).to_i)
+      #self.top = @stack.fetch(@stack.index(self.top).to_i)
       puts "---" + self.top
       return temp
+      
     else
       return nil
     end

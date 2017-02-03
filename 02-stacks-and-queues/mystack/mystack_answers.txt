@@ -1,0 +1,6 @@
+#pop was particularly difficult. It required that all other functions work properly, 
+sequencially to fully work. 
+
+Particularly challenging was designing the logic in such a way that the functio could be 
+called multiple times and retain the integrity of the stack, for example ensuring 
+that @stack.top returns the current value.
