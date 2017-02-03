@@ -25,7 +25,7 @@ class MyStack
       temp = self.top
       puts "***" + temp
       @stack.delete(self.top)
-      #self.top = @stack.fetch(@stack.index(self.top).to_i)
+      self.top = @stack.fetch(@stack.index(self.top).to_i)
       puts "---" + self.top
       return temp
       
