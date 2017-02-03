@@ -8,10 +8,14 @@ class LinkedList
   
   # This method creates a new `Node` using `data`, and inserts it at the end of the list.
   def add_to_tail(node)
+    list
+    node = Node.new(@data) 
+    list << node 
+    node.next
     # @ the tail node.next = null
-    if(node.next == null)
+   # if(node.next == null)
       
-    end
+   # end
   end
 
   # This method removes the last node in the lists and must keep the rest of the list intact.

@@ -9,7 +9,7 @@ and the address (reference) of the next node in the list.
 
   def initialize(data)
     @data = data
-    self.next = null
+    self.next
   end
 end
 
