@@ -10,12 +10,12 @@ class Pixel
   attr_accessor :y
 
   def initialize(red, green, blue, x, y)
-    @red = red
-    @green = green
-    @blue = blue
+    @red = validate_color(red)
+    @green = validate_color(green)
+    @blue = validate_color(blue)
     @x = x
     @y = y
-    
+   
   end
 
   private
@@ -27,6 +27,7 @@ class Pixel
     if color <0
       color = 0
     end
+    return color
   end
 
 end
