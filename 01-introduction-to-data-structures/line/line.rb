@@ -14,8 +14,11 @@ class Line
   end
 
   def leave(person)
-    index(person)
-    members.delete(person)
+    temp_index = index(person)
+    #members.delete(person)
+    members.each do |i|
+      members.insert(i, members.delete(temp_index))
+    end
    
 =begin
     people in position after the person who leaves should move up a psition. 
