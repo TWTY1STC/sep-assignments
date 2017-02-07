@@ -22,7 +22,7 @@ class MyStack
       temp_index = @stack.index(self.top)
       @stack.delete(self.top)
         if temp_index > 0
-          self.top = @stack[temp_index -1]
+          self.top = @stack[temp_index-1]
         else
           self.top = nil
         end
@@ -30,24 +30,6 @@ class MyStack
     else
       return nil
     end
-=begin     
-    top = @stack.index(self.top)
-    if top > 0
-      puts @stack
-      puts "!!!" + self.top
-      puts "@@@" + top.to_s
-      temp = self.top
-      puts "***" + temp
-      @stack.delete(self.top)
-      top--
-      self.top = @stack.fetch(@stack.index(self.top).to_i)
-      puts "---" + self.top
-      return temp
-      
-    else
-      return nil
-    end
-=end
   end
 
   def empty?
