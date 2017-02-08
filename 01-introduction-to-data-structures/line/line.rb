@@ -14,20 +14,9 @@ class Line
   end
 
   def leave(person)
-    temp_index = index(person)
-    #members.delete(person)
-    members.each do |i|
-      members.insert(i, members.delete(temp_index))
-    end
-   
-=begin
-    people in position after the person who leaves should move up a psition. 
-    if person.index > @person_index
-       members << person.index
-      members.person[] > members[p_index] 
-      #members whose index is greater than person who left's index << (shift left -- move up an index)
-    end
-=end
+    temp_index = members.index(person)
+    members.delete_at(temp_index)
+    return temp_index
   end
 
   def front
@@ -35,13 +24,8 @@ class Line
   end
 
   def middle
-    quotient = members.count / 2
-    return members.at[quotient.floor]
-    #count number of members
-    #divide by 2 = quotient
-    # if members.count / 2 = whole number, return member[quotient].name
-    #else, member.count /2 = fraction, return member[quotient.floor].name so 2.5 = 2
-    #member.at[quotient.floor]
+    q = members.count/2
+    return members.at(q.floor)
   end
 
   def back
@@ -49,8 +33,12 @@ class Line
   end
 
   def search(person)
-    index(person)
-    members[@person_index]
+    if members.index(person)
+      person_index = members.index(person)
+      return members[person_index]
+    else
+      return nil
+    end
   end
 
   private
@@ -58,10 +46,9 @@ class Line
   def index(person)
     @person_index = members.find_index(person)
     if @person_index
-            return 
+      return 
     else
       return
     end
   end
-
 end
