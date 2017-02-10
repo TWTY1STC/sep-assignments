@@ -23,6 +23,7 @@ class Screen
 
   def at(x, y)
     #return pixel[x][y]
+    
   end
 
   private
