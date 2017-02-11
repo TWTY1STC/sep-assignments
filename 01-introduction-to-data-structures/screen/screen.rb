@@ -1,5 +1,6 @@
 require_relative 'pixel'
 
+
 class Screen
   attr_accessor :width
   attr_accessor :height
@@ -8,7 +9,8 @@ class Screen
   def initialize(width, height)
     @width = width
     @height = height
-    self.matrix
+    self.matrix = Array.new(height, Array.new(width))
+    #at init matrix holds one container Array that will house other Arrays with pixels
   end
 
   # Insert a Pixel at x, y
@@ -22,6 +24,7 @@ class Screen
   end
 
   def at(x, y)
+    
     #return pixel[x][y]
     
   end
