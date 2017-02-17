@@ -9,22 +9,33 @@ class Screen
   def initialize(width, height)
     @width = width
     @height = height
-    self.matrix = Array.new(height, Array.new(width))
+    self.matrix #= Array.new(@height, Array.new(@width))
     #at init matrix holds one container Array that will house other Arrays with pixels
   end
 
   # Insert a Pixel at x, y
   def insert(pixel, x, y)
+    puts pixel
     if inbounds(x, y)
-      pixel = pixel[x][y]
+      @width = x
+      @height = y
+      return self.matrix = Array.new(@height, Array.new(@width, pixel))
+      #pixel = Array.new(@width)
+      #return self.matrix = Array.new(@height, pixel)
+      #self.matrix << pixel[x][y]
     end
-    @width = x
-    @height = y
+    
    
   end
-
+=begin
+[[ , ,]
+ [ . .]
+ [ , ,]]
+=end
   def at(x, y)
-    
+    #if self.matrix
+      return pixel[x][y]
+    #end
     #return pixel[x][y]
     
   end
