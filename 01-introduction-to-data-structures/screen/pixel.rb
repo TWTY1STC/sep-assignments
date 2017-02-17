@@ -15,7 +15,7 @@ class Pixel
     @blue = validate_color(blue)
     @x = x
     @y = y
-   
+     
   end
 
   private

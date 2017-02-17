@@ -1,0 +1,17 @@
+First challenge is designing the screen template. After reviewing the Array and Matrix
+Ruby Classes and discussing with mentor, figured that the basic screen structure can 
+be represented using the array data structure. 
+
+Array.new() creates an empty array. If you input an argument say Array.new(2), 
+this creates a single array with two slot for elements [ , ].
+We can use that fact to conceptualize how to designate the width of the screen. 
+Further, if you specify Array.new(2, object), the result will be an array with two 
+element slots that are filled by object copies. The object can be anything. 
+
+Combining these concepts, we can create a container array that is filled with 
+pixel arrays. Array.new(2, Array.new(#))
+
+The first Array.new creates a container array with 2 element slots. Those
+elements slots are then filled by another array that has # elements within it. 
+[[ , , ,]
+ [ , , ,]]
