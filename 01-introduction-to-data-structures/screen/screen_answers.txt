@@ -15,3 +15,13 @@ The first Array.new creates a container array with 2 element slots. Those
 elements slots are then filled by another array that has # elements within it. 
 [[ , , ,]
  [ , , ,]]
+ 
+The next challenge is to determine how to insert pixel information at a designated slot. 
+
+[[(0,0), (0,1), (0,2)]
+ [(1,0), (1,1), (1,2)]
+ [(2,0), (2,1), (2,2)]]
+
+pixel has an x, y coordinate, as does matrix. 
+
+#at refers to the matrix coordinate. 
