@@ -18,10 +18,14 @@ class LinkedList
 
   # This method removes the last node in the lists and must keep the rest of the list intact.
   def remove_tail
-    if @tail == nil
-      return
-    else
-      delete(@tail)
+    for node in list
+      if node.next == @tail 
+        temp = @tail
+        @tail = node
+        return temp
+      else
+        node = node.next
+      end
     end
   end
 
