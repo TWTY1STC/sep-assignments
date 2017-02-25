@@ -1,0 +1,5 @@
+From the error in the linked_list lesson, started by adding require_relative in the 
+HashClass file to connect the two files. 
+
+A hash item has only two characteristics: key and value. 
+

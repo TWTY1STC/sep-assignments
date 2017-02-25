@@ -1,14 +1,17 @@
+require_relative 'hash_item' #(availables @key and @value)
+
 class HashClass
 
   def initialize(size)
     @items = Array.new(size)
   end
 
-  def []=(key, value)
+  def []=(key, value)  #<--explain this notation
+    #items[] = key, value
   end
 
 
-  def [](key)
+  def [](key) #< insert?
   end
 
   def resize
@@ -22,6 +25,7 @@ class HashClass
 
   # Simple method to return the number of items in the hash
   def size
+    
   end
 
 end
