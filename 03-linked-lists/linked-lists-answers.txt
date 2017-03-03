@@ -1,0 +1,12 @@
+    if @head == nil 
+      @head, @tail = node
+    #one item
+    elsif @head == @tail
+      @head.next = node
+      @tail = node
+    #multiple
+    else
+      temp = @tail
+      temp.next = node
+      @tail = node
+    end

@@ -8,51 +8,85 @@ class LinkedList
 
   # This method creates a new `Node` using `data`, and inserts it at the end of the list.
   def add_to_tail(node)
-    if node.next == nil
+    if @head == nil 
+      @head = node
       @tail = node
-      node.next = nil
+    #one item
+    elsif @head == @tail
+      @head.next = node
+      @tail = node
+    #multiple
     else
-      node.next
+      temp = @tail
+      temp.next = node
+      @tail = node
     end
+    
+    #if node.next == nil ###
+    #  @tail = node
+    #  node.next = nil
+    #else
+    #  node.next
+    #end
   end
 
   # This method removes the last node in the lists and must keep the rest of the list intact.
   def remove_tail
-    for node in list
-      if node.next == @tail 
-        temp = @tail
-        @tail = node
-        return temp
-      else
-        node = node.next
-      end
+    #empty
+    if @tail == nil
+      return
+    #one item
+    elsif @tail == @head
+      @tail = nil
+      @head = nil
+    #multiple.. need for find the tail
+    else
+      temp = @head
+        while @head && !temp=@head.next
+          temp = temp.next
+          @head = temp
+        end
     end
+    return temp
   end
 
   # This method prints out a representation of the list.
   def print
     result = ""
-    while !@tail
-      start = @head
-      result << start
-      start = start.next
+    while !@head=@tai
+      result << @head.to_s
+      @head = @head.next
     end
     return result.to_str
+  
   end
 
   # This method removes `node` from the list and must keep the rest of the list intact.
   def delete(node)
-    if @head == nil
-      return
-    else
-      start = @head
-      if start.next == node
-        @tail = start
-        return @tail
-      else
-        start = start.next
-      end
+    temp2 = @head
+    temp = @head.next
+    if node ==temp.next
+      temp2 = temp
+      temp = temp.next
+      temp2.next = temp.next
     end
+    #if @head == nil
+    #  return
+    #else
+    #  temp = @head
+    #  while !temp=node
+    #    temp = temp.next
+    #    if temp == node
+    #      temp_t = temp.next
+    #  end
+    #  return 
+      #start = @head
+      #if start.next == node
+      #  @tail = start
+      #else
+      #  start = start.next
+      #end
+    #  return @head
   end
 
   # This method adds `node` to the front of the list and must set the list's head to `node`.
@@ -60,6 +94,7 @@ class LinkedList
     if @head == nil
       @head = node
       @tail = node
+      node.next = nil
     else
       temp = @head
       @head = node
@@ -74,6 +109,7 @@ class LinkedList
       return
     else
       @head = @head.next
+      return @head
     end
   end
 end
