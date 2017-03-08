@@ -17,37 +17,51 @@ class LinkedList
       @tail = node
     #multiple
     else
-      temp = @tail
-      temp.next = node
+      temp = @head
+      while temp.next != @tail
+        temp = temp.next
+      end
+      @tail.next = node
       @tail = node
     end
   end
 
   # This method removes the last node in the lists and must keep the rest of the list intact.
   def remove_tail
-    temp = @head.next
-    while !temp=@tail
+    temp = @head
+     # $ % @ *
+    while temp.next != @tail
       temp = temp.next
-      if temp.next == nil
-        temp = temp
-        @tail = temp
-      end
-      return @head
     end
+    temp = @tail
+    temp.next= nil
+
   end
 
   # This method prints out a representation of the list.
   def print
     node = @head
     while node!=nil
-      puts "{node.data}\n"
+      puts "#{node.data}\n"
       node = node.next
     end
-  
   end
 
   # This method removes `node` from the list and must keep the rest of the list intact.
   def delete(node)
+    #node = @head
+    if node == @head
+      remove_front
+    else 
+      temp = @head
+      while temp.next != node
+        temp = temp.next
+      end
+      temp.next = node.next
+      if node.next = @tail
+        temp = @tail
+      end
+    end
   end
 
   # This method adds `node` to the front of the list and must set the list's head to `node`.
