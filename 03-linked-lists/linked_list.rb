@@ -28,14 +28,21 @@ class LinkedList
 
   # This method removes the last node in the lists and must keep the rest of the list intact.
   def remove_tail
-    temp = @head
-     # $ % @ *
-    while temp.next != @tail
-      temp = temp.next
-    end
-    temp = @tail
-    temp.next= nil
-
+      temp = @head
+      if temp.next == nil
+        return @tail = nil
+      end
+      while temp.next != @tail
+        temp = temp.next
+      end
+      @tail = temp
+      @tail.next = nil
+      
+    
+     #temp = @tail #this resets the temp variable instead of updating it 
+                #what you really want to do is update temp... and change the tail value. 
+    #temp.next= nil #then temp next isn't nil... @tail.next is. 
+    #what if you only have one node (@head = @tail)
   end
 
   # This method prints out a representation of the list.
@@ -52,7 +59,9 @@ class LinkedList
     #node = @head
     if node == @head
       remove_front
-    else 
+    elsif node ==@tail
+      remove_tail
+    else
       temp = @head
       while temp.next != node
         temp = temp.next
