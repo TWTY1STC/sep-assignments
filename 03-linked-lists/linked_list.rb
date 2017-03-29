@@ -1,4 +1,6 @@
 require_relative 'node'
+require 'benchmark'
+
 ## available thru node is next and data
 class LinkedList
   attr_accessor :head
@@ -37,12 +39,7 @@ class LinkedList
       end
       @tail = temp
       @tail.next = nil
-      
-    
-     #temp = @tail #this resets the temp variable instead of updating it 
-                #what you really want to do is update temp... and change the tail value. 
-    #temp.next= nil #then temp next isn't nil... @tail.next is. 
-    #what if you only have one node (@head = @tail)
+
   end
 
   # This method prints out a representation of the list.
@@ -96,4 +93,5 @@ class LinkedList
       return @head
     end
   end
+  
 end

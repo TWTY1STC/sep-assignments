@@ -1,66 +1,7 @@
-    if @head == nil 
-      @head, @tail = node
-    #one item
-    elsif @head == @tail
-      @head.next = node
-      @tail = node
-    #multiple
-    else
-      temp = @tail
-      temp.next = node
-      @tail = node
-    end
-    
-    
-    
-    #empty
-    if @tail == nil
-      return
-    #one item
-    elsif @tail == @head
-      @tail = nil
-      @head = nil
-    #multiple.. need for find the tail
-    else
-      temp = @head
-        while @head && !temp=@head.next
-          temp = temp.next
-          @head = temp
-        end
-    end
-    return temp
-    
-    
-    delete
-     
-    #node is last item and there is something before it
-    #@if node.next ==node
-    #remove_tail
-    if node == @tail
-      
-    temp2 = @head
-    temp = @head.next
-    if node ==temp.next
-      temp2 = temp
-      temp = temp.next
-      temp2.next = temp.next
-    end
-    #if @head == nil
-    #  return
-    #else
-    #  temp = @head
-    #  while !temp=node
-    #    temp = temp.next
-    #    if temp == node
-    #      temp_t = temp.next
-    #  end
-    #  return 
-      #start = @head
-      #if start.next == node
-      #  @tail = start
-      #else
-      #  start = start.next
-      #end
-    #  return @head
-  end
-
+The most challenging problem was conceptualizing the tail actions 
+-- add_to_tail, remove_tail and delete tail, especially when the list was down to one
+node. 
+Oscillating on whether linked lists were first in first out or last in first out data 
+structures complicated things more. 
+ 
+Spatial Locality
