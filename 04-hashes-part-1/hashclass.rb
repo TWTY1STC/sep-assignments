@@ -7,27 +7,40 @@ class HashClass
   end
 
   def []=(key, value)  #<-- insert
-    #items[] = key, value
-    #myhash = HashClass.new()
-    #myhash[key, value] <- th
     index = index(key, size)
-    @items[index][key] = value
+    #key/value does not exist
+    if @items[index] == nil
+      @items[index] = HashItem.new(key, value)
+      #if key exist with a different value, update the value
+    end
+    if @items[index].key==key
+       if @items[index].value != value
+        resize()
+       end
+    end
+    #key/value already exists
+    #key/value doesn't exist but no more slots (NA for now)
+    #key/value exists, no more slots
   end
 
-
   def [](key) #< retrieve.
-    @items[key]
+    if size != nil
+      index = index(key, size) #need to run the 'hash' function to find the location, but where to determine size
+    end
+    return @items[index]
   end
 
   def resize
+    size = @items.size
     
-    if @items.size > 0
-      @items = Array.new(size*2)
+    if size != nil
+      size = size*2
+      @items = Array.new(size)
+      for key in @items do index(key,size) end
+      #index = index(key, size)
+      #@items[index] = HashItem.new(key, value)
     end
-    
     # doubles the size of the hash array
-    
-    @items.each {|key| index(key, size)}
     
     #for key in @items do
     #  index(key, size)
@@ -45,18 +58,14 @@ class HashClass
     #combine all the ascii values into a number string...this is the unique hashcode. return it.the hash
     #hash function & get index of where hashed value should go based on size of array. 
     #determine resizing and insert location
-    
-    hashcode = 0
-    key.each_byte do |c|
-      hashcode += c
+    if key
+      hashcode = key.sum 
+      index = hashcode % size 
     end
-    index = hashcode % size 
     return index
   end
-
   # Simple method to return the number of items in the hash
   def size
     return @items.length
   end
-
 end
