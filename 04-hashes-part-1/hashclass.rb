@@ -12,12 +12,13 @@ class HashClass
     if @items[index] == nil
       @items[index] = HashItem.new(key, value)
       #if key exist with a different value, update the value
+    elsif @items[index].key==key && @items[index].value == value
+         return
+    else
+      resize()
     end
-    if @items[index].key==key
-       if @items[index].value != value
-        resize()
-       end
-    end
+      @items[index].key = value
+  
     #key/value already exists
     #key/value doesn't exist but no more slots (NA for now)
     #key/value exists, no more slots
@@ -27,24 +28,41 @@ class HashClass
     if size != nil
       index = index(key, size) #need to run the 'hash' function to find the location, but where to determine size
     end
-    return @items[index]
+    return @items[index].value
   end
 
   def resize
     size = @items.size
-    
+    #before changing the size of @items, 
+      #need to 'save' the key/values pairs to recalcuate and reposition after resize
+    #storage = [] #iterate thru @items ? [[key, value], [key, value], [key, value]]
+    #go through hash, if 
     if size != nil
       size = size*2
+      copy = @items
       @items = Array.new(size)
-      for key in @items do index(key,size) end
-      #index = index(key, size)
-      #@items[index] = HashItem.new(key, value)
+      copy.each{ |x, y| 
+        next if x == nil 
+        index = index(x, size) 
+        self[x] = y
+        } 
+        
+        #looping construct
+        #if item == nil
+        #  next
+        #else
+        #  index = index(key, size)
+        #  self[key] = value
+        #end
+    #  end
+        #if location is empty, proceed to next index
+        # if not empty, rehash using new size and insert
+      #  index = index(key, size)
+
+      #reinsert @items[index] = HashItem.new(key, value)
+      #HOW to call the 'insert' function? 
+      
     end
-    # doubles the size of the hash array
-    
-    #for key in @items do
-    #  index(key, size)
-    #end
     #recalibrate the hash/index of all elements
   end
 
@@ -59,7 +77,7 @@ class HashClass
     #hash function & get index of where hashed value should go based on size of array. 
     #determine resizing and insert location
     if key
-      hashcode = key.sum 
+      hashcode = key.sum
       index = hashcode % size 
     end
     return index
