@@ -11,13 +11,20 @@ class HashClass
     #key/value does not exist
     if @items[index] == nil
       @items[index] = HashItem.new(key, value)
-      #if key exist with a different value, update the value
-    elsif @items[index].key==key && @items[index].value == value
-         return
-    else
-      resize()
-    end
       @items[index].key = value
+      puts key
+    #elsif @items[index].key == value
+      
+      #if key exist with a different value, update the value
+    elsif @items[index].key==key
+      if @items[index].value == value
+         return
+       
+      else
+      resize()
+      end
+    end
+      #@items[index].key = value
   
     #key/value already exists
     #key/value doesn't exist but no more slots (NA for now)
@@ -25,7 +32,9 @@ class HashClass
   end
 
   def [](key) #< retrieve.
+    size = size()
     if size != nil
+      puts size
       index = index(key, size) #need to run the 'hash' function to find the location, but where to determine size
     end
     return @items[index].value
@@ -38,15 +47,15 @@ class HashClass
     #storage = [] #iterate thru @items ? [[key, value], [key, value], [key, value]]
     #go through hash, if 
     if size != nil
-      size = size*2
+      size = size()*2
       copy = @items
       @items = Array.new(size)
-      copy.each{ |x, y| 
+      copy.each do |x| 
         next if x == nil 
-        index = index(x, size) 
-        self[x] = y
-        } 
-        
+        index = index(x.key, size) 
+        @items[index]= x
+      end
+       
         #looping construct
         #if item == nil
         #  next
@@ -76,8 +85,16 @@ class HashClass
     #combine all the ascii values into a number string...this is the unique hashcode. return it.the hash
     #hash function & get index of where hashed value should go based on size of array. 
     #determine resizing and insert location
-    if key
-      hashcode = key.sum
+    if key == nil
+      return 0
+    else
+    hashcode = 0
+          #while hashcode.length < 8
+      #  hashcode +=key.ord
+      #end
+    
+      hashcode = key.sum 
+      #key.chars.each{ |x| hashcode +=x.ord}
       index = hashcode % size 
     end
     return index

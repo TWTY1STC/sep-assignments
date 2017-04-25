@@ -1,5 +1,11 @@
 From the error in the linked_list lesson, started by adding require_relative in the 
 HashClass file to connect the two files. 
 
-A hash item has only two characteristics: key and value. 
+A hash item has only two characteristics: key and value. Initialize them on start. 
 
+
+
+April 24th
+Yesterday: cleaned up the resize function. Confident that it works but dependent methods make it fail
+today: troubleshoot precisely where the hash[key] = value is failing. 
+    
