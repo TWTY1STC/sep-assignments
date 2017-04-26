@@ -8,4 +8,50 @@ A hash item has only two characteristics: key and value. Initialize them on star
 April 24th
 Yesterday: cleaned up the resize function. Confident that it works but dependent methods make it fail
 today: troubleshoot precisely where the hash[key] = value is failing. 
-    
+outcome: fixed one error -- so that resize doubles the array appropriately when a collision occurs
+and the values do not match app. 
+
+Getting a new error that seems related to the retrieve function. 
+hash[key] = value sets teh value of the key to value. Error: 
+undefined method key (or value) for nil:NilClass 
+1) HashClass#resize copies existing values properly when the array is resized
+     Failure/Error: expect(movies["A New Hope"]).to eq "Average"
+
+       expected: "Average"
+            got: nil
+
+       (compared using ==)
+     # ./hashclass_spec.rb:37:in `block (3 levels) in <top (required)>'
+
+2) HashClass hash[key] = value sets the value of key to value
+ Failure/Error: expect(lotr_movies["The Lord of the Rings: The Fellowship of the Ring"]).to eq "3 hours, 48 minutes"
+
+   expected: "3 hours, 48 minutes"
+        got: nil
+
+   (compared using ==)
+   
+April 25th
+Yesterday: eliminated one error by moving a line of code in the insert function above the conditional tests. The line was undoing
+things done in the conditional tests. 
+Today: Continue troubleshooting the error above. Further printing revealed that somewhere the key and value are being equated.
+Identify which block of code is forcing that. 
+- One of the conditional tests in the insert function 'elsif @items[index].key == value' was responsible. 
+- instead, the test needs to check if the key == key and the associated value == value, otherwise size. 
+-The problem now is determining how to efficiently conduct both checks. I'll revisit the && notation which had failed previously.
+
+- Printing 'puts @items[index].key + ", " + @items[index].value' reveals that the key and value are still the same. 
+- The problem wasn't the outcome of the conditional test. Rather, the line of code I moved yesterday in the insert function states
+@items[index].key = value. 
+Commenting eliminated the mirroring effect of the key and value. While it seems meaningles now, that bit of code was kept until this point 
+because it seemed necessary at some point to explicitly point the HashItem's key to its associated HashItem's value. 
+Eliminating this line of code eliminated another error, leaving only one the 7th spec. 
+
+HashClass hash[key] = value sets the value of key to value
+     Failure/Error: expect(lotr_movies["The Lord of the Rings: The Return of the King"]).to eq "3 hours, 21 minutes"
+
+       expected: "3 hours, 21 minutes"
+            got: nil
+It's trouble could be in the insert or resize functions. On the surface, this spec is the reason the code above that explicitly links 
+the HashItem key and value seemed necessary. Although saying: @items[index].key = value probably does more than just point the key to 
+the value... it equates (replace/redefines the value) of one of them. 

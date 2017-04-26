@@ -11,18 +11,16 @@ class HashClass
     #key/value does not exist
     if @items[index] == nil
       @items[index] = HashItem.new(key, value)
-      @items[index].key = value
-      puts key
+      #@items[index].key = value
+      puts key + ", " + value
+      #puts hash.size
     #elsif @items[index].key == value
       
       #if key exist with a different value, update the value
-    elsif @items[index].key==key
-      if @items[index].value == value
+    elsif @items[index].key == key && @items[index].value == value
          return
-       
       else
       resize()
-      end
     end
       #@items[index].key = value
   
@@ -33,37 +31,36 @@ class HashClass
 
   def [](key) #< retrieve.
     size = size()
-    if size != nil
-      puts size
-      index = index(key, size) #need to run the 'hash' function to find the location, but where to determine size
+    index = index(key, size)
+    if @items[index]
+      #need to run the 'hash' function to find the location, but where to determine size
+      return @items[index].value
+    else
+      return
     end
-    return @items[index].value
   end
 
   def resize
-    size = @items.size
+    size = size()
     #before changing the size of @items, 
       #need to 'save' the key/values pairs to recalcuate and reposition after resize
     #storage = [] #iterate thru @items ? [[key, value], [key, value], [key, value]]
     #go through hash, if 
+    copy = @items
     if size != nil
-      size = size()*2
-      copy = @items
+      size = size*2
       @items = Array.new(size)
       copy.each do |x| 
+        
         next if x == nil 
+        #puts x.key
+        #puts x.value
         index = index(x.key, size) 
-        @items[index]= x
+        #puts x.key
+        #puts x.value
+        @items[index] = x
+        #puts @items[index].key + ", " + @items[index].value
       end
-       
-        #looping construct
-        #if item == nil
-        #  next
-        #else
-        #  index = index(key, size)
-        #  self[key] = value
-        #end
-    #  end
         #if location is empty, proceed to next index
         # if not empty, rehash using new size and insert
       #  index = index(key, size)
