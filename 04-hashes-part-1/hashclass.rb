@@ -48,7 +48,7 @@ class HashClass
     #go through hash, if 
     copy = @items
     if size != nil
-      size = size*2
+      size = size()*2
       @items = Array.new(size)
       copy.each do |x| 
         

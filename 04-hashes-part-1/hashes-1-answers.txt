@@ -55,3 +55,18 @@ HashClass hash[key] = value sets the value of key to value
 It's trouble could be in the insert or resize functions. On the surface, this spec is the reason the code above that explicitly links 
 the HashItem key and value seemed necessary. Although saying: @items[index].key = value probably does more than just point the key to 
 the value... it equates (replace/redefines the value) of one of them. 
+
+When I print: puts @items[index].key + ", " + @items[index].value, I get: 
+
+...Return of the Jedi, The Best
+A New Hope, Average
+Empire Strikes Back, Excellent
+..key, value
+.The Lord of the Rings: The Two Towers, 3 hours, 55 minutes
+The Lord of the Rings: The Fellowship of the Ring, 3 hours, 48 minutes
+The Lord of the Rings: The Two Towers, 3 hours, 55 minutes
+The Lord of the Rings: The Fellowship of the Ring, 3 hours, 48 minutes
+The Hobbit: An Unexpected Journey, 3 hours, 2 minutes
+F
+
+This result is interesting because 
