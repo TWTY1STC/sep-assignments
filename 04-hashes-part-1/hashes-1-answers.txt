@@ -69,4 +69,6 @@ The Lord of the Rings: The Fellowship of the Ring, 3 hours, 48 minutes
 The Hobbit: An Unexpected Journey, 3 hours, 2 minutes
 F
 
-This result is interesting because 
+This result is interesting because the inserts seems to fail... the Lord of the Rings entries are copied before 
+moving on to the Hobbit entries which don't finish. These puts could be from different moments, but based on the 
+last spec, the insert calls are back to back. Why would the 3rd call fail, restarting from the 1st then jumping to the fourth?
