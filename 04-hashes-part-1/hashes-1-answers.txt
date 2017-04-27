@@ -72,3 +72,15 @@ F
 This result is interesting because the inserts seems to fail... the Lord of the Rings entries are copied before 
 moving on to the Hobbit entries which don't finish. These puts could be from different moments, but based on the 
 last spec, the insert calls are back to back. Why would the 3rd call fail, restarting from the 1st then jumping to the fourth?
+
+April 26th:
+
+Yesterday: Gained greater understanding of the interdependence between menthods, allowing me to eliminate 2 errors by repositioning
+a few lines of code. Remained with one error that seemed to result from the insert function 'jumping'(?)?
+Today: Review the remaining error closely to identify from where it eminates. Shift gears somewhat and read checkpoint 5 reading 
+and review the dummy files. 
+
+By printing statements at each phase of the insert function, you can see that the function isn't really skipping per se, rather, 
+collisions are happening causing the hash to resize. One thought was perhaps the hashing function is too simple; however, the tests
+expect specific hash.sizes... when I make the index funtion more complex the resulting index values do not work well. 
+

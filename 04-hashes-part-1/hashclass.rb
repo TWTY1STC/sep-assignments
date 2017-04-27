@@ -8,23 +8,25 @@ class HashClass
 
   def []=(key, value)  #<-- insert
     index = index(key, size)
-    #key/value does not exist
+    #key/value does not exist, add a hash item
     if @items[index] == nil
       @items[index] = HashItem.new(key, value)
+      puts key + ", " + value + ' ' + index.to_s
       #@items[index].key = value
-      puts key + ", " + value
-      #puts hash.size
-    #elsif @items[index].key == value
+      #elsif @items[index].key == value
       
-      #if key exist with a different value, update the value
+    #if key/value already exists, return the HashItem
     elsif @items[index].key == key && @items[index].value == value
+      puts 'REPEAT ' + key + ", " + value+ ' ' + index.to_s
          return
-      else
+    else
+        #if key exists with a different value, expand
       resize()
+      puts 'COLLISION ' + key + ", " + value+ ' ' + index.to_s
     end
       #@items[index].key = value
   
-    #key/value already exists
+    #
     #key/value doesn't exist but no more slots (NA for now)
     #key/value exists, no more slots
   end
@@ -44,8 +46,9 @@ class HashClass
     size = size()
     #before changing the size of @items, 
       #need to 'save' the key/values pairs to recalcuate and reposition after resize
-    #storage = [] #iterate thru @items ? [[key, value], [key, value], [key, value]]
-    #go through hash, if 
+    #i.e storage = [] #iterate thru @items ? [[key, value], [key, value], [key, value]]
+    #if location is empty, proceed to next index
+    #if not empty, rehash using new size and insert
     copy = @items
     if size != nil
       size = size()*2
@@ -61,9 +64,6 @@ class HashClass
         @items[index] = x
         #puts @items[index].key + ", " + @items[index].value
       end
-        #if location is empty, proceed to next index
-        # if not empty, rehash using new size and insert
-      #  index = index(key, size)
 
       #reinsert @items[index] = HashItem.new(key, value)
       #HOW to call the 'insert' function? 
