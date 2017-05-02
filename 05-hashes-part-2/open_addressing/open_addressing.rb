@@ -2,12 +2,13 @@ require_relative 'node'
 
 class OpenAddressing
   def initialize(size)
+    @items = Array.new(size)
   end
 
-  def []=(key, value)
+  def []=(key, value) #<--insert
   end
 
-  def [](key)
+  def [](key) #<--retrieve
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -18,10 +19,12 @@ class OpenAddressing
 
   # Given an index, find the next open index in @items
   def next_open_index(index)
+    #start with hash[index], while hash[index+1] != nil, keep going. return index where h[i] = nil
   end
 
   # Simple method to return the number of items in the hash
   def size
+    return @items.length
   end
 
   # Resize the hash

@@ -16,11 +16,16 @@ class HashClass
       #elsif @items[index].key == value
       
     #if key/value already exists, return the HashItem
-    elsif @items[index].key == key && @items[index].value == value
+    elsif @items[index].key == key
+      if @items[index].value == value
       puts 'REPEAT ' + key + ", " + value+ ' ' + index.to_s
          return
+      else
+        @items[index].value == value
+      end
+        #if key exists with a different value, replace
     else
-        #if key exists with a different value, expand
+        # if index returns a location that's taken, expand
       resize()
       puts 'COLLISION ' + key + ", " + value+ ' ' + index.to_s
     end
@@ -64,7 +69,7 @@ class HashClass
         @items[index] = x
         #puts @items[index].key + ", " + @items[index].value
       end
-
+      #what if during the re-allocation, you have a collision? Resize within resize. 
       #reinsert @items[index] = HashItem.new(key, value)
       #HOW to call the 'insert' function? 
       

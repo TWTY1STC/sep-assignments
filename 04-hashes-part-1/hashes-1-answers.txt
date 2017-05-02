@@ -84,3 +84,9 @@ By printing statements at each phase of the insert function, you can see that th
 collisions are happening causing the hash to resize. One thought was perhaps the hashing function is too simple; however, the tests
 expect specific hash.sizes... when I make the index funtion more complex the resulting index values do not work well. 
 
+
+May 1
+During call, identified two other scenarios that the insert function needs to handle. Worked on the scenarios post call 
+but need to continue working out the logic. 
+
+Today: Start by deconstructing the insert function (what needs to happen). Then reorganize the code 
