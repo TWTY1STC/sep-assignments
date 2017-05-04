@@ -1,0 +1,33 @@
+OpenAddressing
+
+TO INSERT
+Need to know the location and if something exists at that location
+location = index(key, size)
+if @items[location] == nil
+    @items[location] = Node.new(key, value)
+else
+    location ++
+    
+...
+Because we are dealing with nodes, we also need to keep track of the location and the next item (connect them)
+The last item (tail) will have next = nil. 
+
+First item to be inserted-- need a test case that varifies that the Hash is empty and this will be item [0]. 
+You can check if @items.length == 0, if so, @items[location] = Node.new(key, value) and @items[location] = nil
+
+The second item--at this point @items.length != nil, so get the location = index(key, n). Now we need to check if 
+the location already has something in it: if @items[location] == nil, @items[location] = Node.new(key, value) else
+add one to the index, check if it's empty, insert if it is, add one to index again if not. We have a helper function, 
+next_open_index(starting index)... this is where the looping happens, and then it returns a new index value that's open
+
+...since we have to test various cases, and using if and elses becomes awkward, try to set up a ruby switch/case
+type. If it works, I think it will be clearer and cleaner. 
+What is the case... location? --> 
+location can be empty 
+    [insert a new node; next = nil (?)], 
+location can be full, 
+    check if location.key = key if so, update the value; 
+    if not, then need to find the next open index and update location assignment then insert a new node.
+    what about node.next (?)
+        Does it necessarily need to be the case that it will progress in order (no). Really depends on what the initial 
+        index is returned
