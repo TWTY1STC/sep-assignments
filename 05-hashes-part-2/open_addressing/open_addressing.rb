@@ -7,8 +7,10 @@ class OpenAddressing
 
   def []=(key, value)
     loc = index(key, size)
-    if @items[loc].key == key
+    
+    if @items[loc].key == key #? nil then put Node in it / else find next_open_index and put it there. 
       next_open_index(loc)
+      
     end
   end
 
