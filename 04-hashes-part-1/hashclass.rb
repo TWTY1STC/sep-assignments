@@ -16,29 +16,32 @@ class HashClass
       #elsif @items[index].key == value
       
     #if key/value already exists, return the HashItem
-    elsif @items[index].key == key
-      if @items[index].value == value
+    elsif @items[index].key == key && @items[index].value == value
       puts 'REPEAT ' + key + ", " + value+ ' ' + index.to_s
-         return
-      else
-        @items[index].value == value
-      end
-        #if key exists with a different value, replace
+         return 'entry exists'
     else
-        # if index returns a location that's taken, expand
-      resize()
+      # if index returns a location that's taken, expand
+      while 1
       puts 'COLLISION ' + key + ", " + value+ ' ' + index.to_s
+        resize()
+        loc = index(key, size())
+        
+        break if @items[loc] == nil || @items[loc].key == key
+      end
+      loc = index(key, size())
+      if  @items[loc] == nil
+        @items[loc] = HashItem.new(key, value)
+      else
+        #if key exists with a different value, replace
+        @items[loc].value == value
+      end
     end
-      #@items[index].key = value
-  
-    #
     #key/value doesn't exist but no more slots (NA for now)
     #key/value exists, no more slots
   end
 
   def [](key) #< retrieve.
-    size = size()
-    index = index(key, size)
+    index = index(key, size())
     if @items[index]
       #need to run the 'hash' function to find the location, but where to determine size
       return @items[index].value
