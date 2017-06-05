@@ -1,90 +1,96 @@
 require_relative 'linked_list'
+require_relative 'node'
 
 class SeparateChaining
-  attr_reader :max_load_factor
+    attr_reader :max_load_factor
 
-  def initialize(size)
-    @items = Array.new(size)
-    @item_count = 0
-    @max_load_factor = 0.7
-  end
-
-  def []=(key, value)
-    i = index(key, @items.size)
-    n = Node.new(key, value)
-
-    # COLLISION!
-    @items[i] != nil ? list = @items[i] : list = LinkedList.new
-
-    list.add_to_tail(n)
-    @items[i] = list
-    @item_count = @item_count + 1
-
-    # Resize the hash if the load factor grows too large
-    if load_factor.to_f > max_load_factor.to_f
-      resize
+    def initialize(size)
+        @items = Array.new(size)
+        @max_load_factor = 0.7
+        @counter = 0
     end
-  end
-
-  def [](key)
-    list = @items.at(index(key, @items.size))
-    if list != nil
-      curr = list.head
-      while curr != nil
-        if curr.key == key
-          return curr.value
+    
+    def []=(key, value)
+        loc = index(key, size())
+        node = Node.new(key, value)
+        
+        if @items[loc] == nil
+            list = LinkedList.new()
+        else
+            list = @items[loc]
         end
-        curr = curr.next
-      end
-    end
-  end
-
-  # Returns a unique, deterministically reproducible index into an array
-  # We are hashing based on strings, let's use the ascii value of each string as
-  # a starting point.
-  def index(key, size)
-    sum = 0
-
-    key.split("").each do |char|
-      if char.ord == 0
-        next
-      end
-
-      sum = sum + char.ord
-    end
-
-    sum % size
-  end
-
-  # Calculate the current load factor
-  def load_factor
-    @item_count / self.size.to_f
-  end
-
-  # Simple method to return the number of items in the hash
-  def size
-    @items.size
-  end
-
-  # Resize the hash
-  def resize
-    new_size = size*2
-    new_items = Array.new(new_size)
-    (0..@items.size-1).each do |i|
-      list = @items[i]
-      if list != nil
-        curr = list.head
-        # We only need to compute the new index once
-        new_index = index(curr.key, new_items.size)
-        while curr != nil
-          list = LinkedList.new
-          list.add_to_tail(curr)
-          new_items[new_index] = list
-          curr = curr.next
+        
+        list.add_to_tail(node)
+        @items[loc] = list
+        
+        @counter = @counter+1
+        
+        #trigger resize based on load factor
+        if load_factor >= @max_load_factor
+            self.resize
         end
-      end
     end
-
-    @items = new_items
-  end
+    
+    def [](key) #<--retrieve
+       loc = index(key, @items.size())
+       list = @items[loc]
+       
+       if list != nil
+           head = list.head
+           while head != nil
+               if head.key == key
+                   return head.value
+               end
+               head = head.next
+           end
+       end
+    end
+    
+    def index(key, size)
+        #the index = starting point from which to being your search (for key or for an empty slot)
+        #can use same formulation as other exercises
+        index = key.sum % size
+    end
+    
+    def load_factor
+        #number of values it stores divided by number of buckets, no greater than .7. 
+        #need to keep track of how many items in the hash
+        return @counter / @items.size()
+    end
+    
+    def size
+        return @items.length
+    end
+    
+    def resize
+        #need to hash within a loop to ensure it resize
+        #again if a collision happens while resizing
+        copy = @items
+        size = size() *2
+        @items = Array.new(size)
+        copy.each do |x|
+            if x != nil
+                current_head = x.head
+                if current_head != nil
+                    index = self.index(current_head.key, size())
+                    node = Node.new(current_head.key, current_head.value)
+                    if @items[index]==nil
+                        @items[index] = LinkedList.new()
+                        @items[index].add_to_tail(node)
+                        if load_factor >= @max_load_factor
+                            self.resize
+                        end
+                        current_head = current_head.next
+                    else
+                        @items[index].add_to_tail(node)
+                        if load_factor >= @max_load_factor
+                            self.resize
+                        end
+                        current_head = current_head.next
+                    end
+                end
+            end
+        end
+    end
+    
 end
