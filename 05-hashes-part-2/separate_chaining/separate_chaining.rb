@@ -7,7 +7,7 @@ class SeparateChaining
     def initialize(size)
         @items = Array.new(size)
         @max_load_factor = 0.7
-        @counter = 0
+        @counter = 0.0
     end
     
     def []=(key, value)
@@ -23,11 +23,12 @@ class SeparateChaining
         list.add_to_tail(node)
         @items[loc] = list
         
-        @counter = @counter+1
+        @counter = @counter+1.0
         
         #trigger resize based on load factor
         if load_factor >= @max_load_factor
-            self.resize
+            resize()
+            self[key] = value
         end
     end
     
@@ -72,19 +73,20 @@ class SeparateChaining
             if x != nil
                 current_head = x.head
                 if current_head != nil
-                    index = self.index(current_head.key, size())
+                    index = index(current_head.key, size())
                     node = Node.new(current_head.key, current_head.value)
                     if @items[index]==nil
+                        
                         @items[index] = LinkedList.new()
                         @items[index].add_to_tail(node)
                         if load_factor >= @max_load_factor
-                            self.resize
+                            resize()
                         end
                         current_head = current_head.next
                     else
                         @items[index].add_to_tail(node)
                         if load_factor >= @max_load_factor
-                            self.resize
+                            resize()
                         end
                         current_head = current_head.next
                     end
